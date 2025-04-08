@@ -65,7 +65,8 @@ class _MyFormState extends State<MyForm> {
           ElevatedButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                _logger.i('Form submitted. User input is Logged');
+                _logger.i('Form is valid. User input is logged.'); // Log the user input
+                showAlertDialog(context, 'Form Submitted', 'User input is logged.');
               }
             },
             child: const Text('Submit'),
@@ -74,4 +75,24 @@ class _MyFormState extends State<MyForm> {
       ),
     );
   }
+}
+
+void showAlertDialog(BuildContext context, String title, String message) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
